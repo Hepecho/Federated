@@ -5,6 +5,8 @@ from os.path import join as ospj
 import json
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import MultipleLocator
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 
 def epoch_time(start_time, end_time):
@@ -99,8 +101,12 @@ def plt_hp(title, hp_type, hp_list, config):
     }
     for i in hp_list:
         config.__dict__[hp_type] = i
+        if i == 'bf':
+            config.attack_strength = - 1.0
         config_name = set_config_name(config)
         metric_file_path = ospj(config.log_dir, config.attack, config_name, 'test_0.csv')
+        if i == 'bf':
+            config.attack_strength = 1.0
         test_pd = read_csv(metric_file_path)
         metric_data[f'{hp_type} = {i}'] = test_pd['acc']
     plt_line_chart(metric_data, img_path=f'image/{title} (Acc).png')
@@ -114,8 +120,12 @@ def plt_hp(title, hp_type, hp_list, config):
     }
     for i in hp_list:
         config.__dict__[hp_type] = i
+        if i == 'bf':
+            config.attack_strength = - 1.0
         config_name = set_config_name(config)
         metric_file_path = ospj(config.log_dir, config.attack, config_name, 'test_0.csv')
+        if i == 'bf':
+            config.attack_strength = 1.0
         test_pd = read_csv(metric_file_path)
         metric_data[f'{hp_type} = {i}'] = test_pd['loss']
     plt_line_chart(metric_data, img_path=f'image/{title} (Loss).png')

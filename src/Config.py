@@ -9,8 +9,8 @@ class Config(object):
         self.device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
         self.log_dir = ospj('log', self.model_name)
         self.ckpt_dir = ospj('checkpoint', self.model_name)
-        self.attack = 'lf'  # 攻击模式 ['raw', 'lf', 'bf']
-        self.defence = 'raw'  # 防御算法 ['raw, 'krum']
+        self.attack = 'bf'  # 攻击模式 ['raw', 'lf', 'bf']
+        self.defence = 'krum'  # 防御算法 ['raw, 'krum']
 
         # 学习参数
         self.client_epochs = 10  # client epoch数  25

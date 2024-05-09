@@ -76,6 +76,12 @@ if __name__ == '__main__':
     if args.action == 0:
         assert config.attack == 'raw', "config.attack != 'raw'!"
         main(config, args)
+        # plt_hp(
+        #     title='Federated System',
+        #     hp_type='attack',
+        #     hp_list=['raw', 'lf', 'bf'],
+        #     config=config
+        # )
     elif args.action == 1:
         assert config.attack == 'lf', "config.attack != 'lf'!"
         main(config, args)
@@ -136,6 +142,10 @@ if __name__ == '__main__':
         for i in range(6, 15, 2):
             config.byzantine_workers = i
             main(config, args)
+        # config.byzantine_workers = 8
+        # for p in [0.01, 0.1, 5.0, 10.0]:
+        #     config.attack_strength = - p
+        #     main(config, args)
 
     elif args.action == 9:
         assert config.attack == 'bf', "config.attack != 'bf'!"
@@ -171,13 +181,13 @@ if __name__ == '__main__':
         plt_hp(
             title=title,
             hp_type='attack_strength',
-            hp_list=[0.01, 0.1, 1.0, 5.0, 10],
+            hp_list=[-0.01, -0.1, -1.0, -5.0, -10.0],
             config=config
         )
 
     elif args.action == 12:
         assert config.defence == 'krum', "config.defence != 'krum'!"
-        for k in [1, 5, 10, 15, 20]:
+        for k in [5, 10, 15, 20]:
             config.k = k
             main(config, args)
 
@@ -200,7 +210,7 @@ if __name__ == '__main__':
 
     elif args.action == 14:
         assert config.defence == 'krum', "config.defence != 'krum'!"
-        for b in range(4, 13, 2):
+        for b in range(6, 13, 2):
             config.b = b
             main(config, args)
 

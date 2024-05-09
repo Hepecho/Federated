@@ -1,13 +1,6 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Python version: 3.6
-
 import torch
 from torch import nn, autograd
 from torch.utils.data import DataLoader, Dataset
-import numpy as np
-import random
-from sklearn import metrics
 import copy
 
 
@@ -56,10 +49,6 @@ class LocalUpdate(object):
                 loss = self.loss_func(log_probs, labels)
                 loss.backward()
                 optimizer.step()
-                # if self.config.verbose and batch_idx % 10 == 0:
-                #     print('Update Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                #         iter, batch_idx * len(images), len(self.ldr_train.dataset),
-                #                100. * batch_idx / len(self.ldr_train), loss.item()))
                 batch_loss.append(loss.item())
             epoch_loss.append(sum(batch_loss)/len(batch_loss))
 

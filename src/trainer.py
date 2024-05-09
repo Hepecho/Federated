@@ -104,9 +104,6 @@ def train_model(config):
         end_time = time.time()
         epoch_mins, epoch_secs = epoch_time(start_time, end_time)
 
-        # print loss
-        # loss_avg = sum(loss_locals) / len(loss_locals)
-        # print('Round {:3d}, Average loss {:.3f}'.format(epoch, loss_avg))
         if epoch > 0 and epoch % 100 == 0:
             epoch_model_path = ospj(local_ckpt_dir, 'iter_model_' + str(epoch) + '.pkl')
             with open(epoch_model_path, 'wb') as f:
